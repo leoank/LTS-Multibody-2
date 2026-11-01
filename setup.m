@@ -11,6 +11,13 @@ MODELS_DIR   = fullfile(PROJECT_ROOT, 'models');
 addpath(genpath(PROJECT_ROOT));
 cd(PROJECT_ROOT);
 
+% The models' workspaces point at FBR25forVD_DataFile1.m by an absolute path
+% on the machine that last imported them, so on any other machine they load
+% empty (a warning) and every block fails on smiData. Loading it into the base
+% workspace here lets the blocks resolve smiData from there instead, without
+% re-saving the .slx files.
+run(fullfile(MODELS_DIR, 'FBR25forVD_DataFile1.m'));
+
 disp('=== FBR25 Project Setup ===');
 disp(['Project root : ', PROJECT_ROOT]);
 disp(['STEP files   : ', STEP_DIR]);
